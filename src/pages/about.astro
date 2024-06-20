@@ -1,5 +1,20 @@
 ---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 
+const pageTitle = "About";
+const finished = true;
+const identity = {
+  name: "shironxn",
+  country: "konoha",
+  age: "16",
+  hobbies: ["art", "coding"],
+};
+const skills = ["go", "js", "ts", "ui/ux", "figma"];
+const skillColor = "blue";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
 <html lang="en">
@@ -8,13 +23,41 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>{pageTitle}</title>
+    <style define:vars={{ skillColor, fontWeight, textCase }}>
+      h1 {
+        color: purple;
+        font-size: 4rem;
+      }
+      .skill {
+        color: var(--skillColor);
+        font-weight: var(--fontWeight);
+        text-transform: var(--textCase);
+      }
+    </style>
   </head>
   <body>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/blog">Blog</a>
+    <Header />
 
-    <h1>Ini blog</h1>
+    <h1>About Me</h1>
+    <ul>
+      <li>Hello my name is {identity.name}</li>
+      <li>Im currently living in {identity.country}</li>
+      <li>My age is {identity.age}</li>
+      <li>My hobbies {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+    </ul>
+
+    <h2>My Skills</h2>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    <h2>Status</h2>
+    <p>{finished ? "done yey" : "not done"}</p>
+
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+    </script>
   </body>
 </html>
